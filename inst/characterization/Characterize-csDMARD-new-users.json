@@ -1,0 +1,421 @@
+{
+  "name": "[EHDEN RA] Characterize conditions in csDMARD new users",
+  "cohorts": [
+    {
+      "id": 145,
+      "name": "[EHDEN RA] New users of methotrexate",
+      "description": null,
+      "createdDate": "2020-01-13 11:11",
+      "modifiedDate": "2020-01-13 11:36",
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugExposure": {
+                "CodesetId": 0,
+                "First": true,
+                "DrugTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {
+            "PriorDays": 365,
+            "PostDays": 0
+          },
+          "PrimaryCriteriaLimit": {
+            "Type": "First"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "[EHDEN RA] Methotrexate",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 1305058,
+                    "CONCEPT_NAME": "Methotrexate",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "6851",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "RxNorm",
+                    "CONCEPT_CLASS_ID": "Ingredient"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 1,
+            "name": "[EHDEN RA] Rheumatoid arthritis",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 80809,
+                    "CONCEPT_NAME": "Rheumatoid arthritis",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "69896004",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {
+          "Type": "First"
+        },
+        "ExpressionLimit": {
+          "Type": "First"
+        },
+        "InclusionRules": [
+          {
+            "name": "Age >= 18",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [],
+              "DemographicCriteriaList": [
+                {
+                  "Age": {
+                    "Value": 18,
+                    "Op": "gte"
+                  }
+                }
+              ],
+              "Groups": []
+            }
+          }
+        ],
+        "EndStrategy": {
+          "CustomEra": {
+            "DrugCodesetId": 0,
+            "GapDays": 90,
+            "Offset": 0
+          }
+        },
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      }
+    },
+    {
+      "id": 150,
+      "name": "[EHDEN RA] New users of sulfasazine",
+      "description": null,
+      "createdDate": "2020-01-13 11:51",
+      "modifiedDate": "2020-01-13 11:52",
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugExposure": {
+                "CodesetId": 2,
+                "First": true,
+                "DrugTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {
+            "PriorDays": 365,
+            "PostDays": 0
+          },
+          "PrimaryCriteriaLimit": {
+            "Type": "First"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 2,
+            "name": "sulfasalazine",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 964339,
+                    "CONCEPT_NAME": "Sulfasalazine",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "9524",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "RxNorm",
+                    "CONCEPT_CLASS_ID": "Ingredient"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {
+          "Type": "First"
+        },
+        "ExpressionLimit": {
+          "Type": "First"
+        },
+        "InclusionRules": [
+          {
+            "name": "Age >= 18",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [],
+              "DemographicCriteriaList": [
+                {
+                  "Age": {
+                    "Value": 18,
+                    "Op": "gte"
+                  }
+                }
+              ],
+              "Groups": []
+            }
+          }
+        ],
+        "EndStrategy": {
+          "CustomEra": {
+            "DrugCodesetId": 2,
+            "GapDays": 90,
+            "Offset": 0
+          }
+        },
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      }
+    },
+    {
+      "id": 151,
+      "name": "[EHDEN RA] New users of hydroxychloroquine",
+      "description": null,
+      "createdDate": "2020-01-13 11:52",
+      "modifiedDate": "2020-01-13 11:54",
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugExposure": {
+                "CodesetId": 3,
+                "First": true,
+                "DrugTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {
+            "PriorDays": 365,
+            "PostDays": 0
+          },
+          "PrimaryCriteriaLimit": {
+            "Type": "First"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 3,
+            "name": "[EHDEN Studyathon] Hydroxychloroquine",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 1777087,
+                    "CONCEPT_NAME": "Hydroxychloroquine",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "5521",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "RxNorm",
+                    "CONCEPT_CLASS_ID": "Ingredient"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {
+          "Type": "First"
+        },
+        "ExpressionLimit": {
+          "Type": "First"
+        },
+        "InclusionRules": [
+          {
+            "name": "Age >= 18",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [],
+              "DemographicCriteriaList": [
+                {
+                  "Age": {
+                    "Value": 18,
+                    "Op": "gte"
+                  }
+                }
+              ],
+              "Groups": []
+            }
+          }
+        ],
+        "EndStrategy": {
+          "CustomEra": {
+            "DrugCodesetId": 3,
+            "GapDays": 90,
+            "Offset": 0
+          }
+        },
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      }
+    },
+    {
+      "id": 152,
+      "name": "[EHDEN RA] New users of leflunomide",
+      "description": null,
+      "createdDate": "2020-01-13 11:54",
+      "modifiedDate": "2020-01-13 11:54",
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugExposure": {
+                "CodesetId": 4,
+                "First": true,
+                "DrugTypeExclude": false
+              }
+            }
+          ],
+          "ObservationWindow": {
+            "PriorDays": 365,
+            "PostDays": 0
+          },
+          "PrimaryCriteriaLimit": {
+            "Type": "First"
+          }
+        },
+        "ConceptSets": [
+          {
+            "id": 4,
+            "name": "[EHDEN Studyathon] Leflunomide",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 1101898,
+                    "CONCEPT_NAME": "leflunomide",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "27169",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "RxNorm",
+                    "CONCEPT_CLASS_ID": "Ingredient"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {
+          "Type": "First"
+        },
+        "ExpressionLimit": {
+          "Type": "First"
+        },
+        "InclusionRules": [
+          {
+            "name": "Age >= 18",
+            "expression": {
+              "Type": "ALL",
+              "CriteriaList": [],
+              "DemographicCriteriaList": [
+                {
+                  "Age": {
+                    "Value": 18,
+                    "Op": "gte"
+                  }
+                }
+              ],
+              "Groups": []
+            }
+          }
+        ],
+        "EndStrategy": {
+          "CustomEra": {
+            "DrugCodesetId": 4,
+            "GapDays": 90,
+            "Offset": 0
+          }
+        },
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {}
+      }
+    }
+  ],
+  "featureAnalyses": [
+    {
+      "id": 67,
+      "type": "PRESET",
+      "name": "Condition Occurrence Long Term",
+      "domain": "CONDITION",
+      "statType": "PREVALENCE",
+      "descr": "One covariate per condition in the condition_occurrence table starting in the long term window.",
+      "design": "ConditionOccurrenceLongTerm",
+      "description": "One covariate per condition in the condition_occurrence table starting in the long term window."
+    }
+  ],
+  "parameters": [],
+  "stratas": [],
+  "strataOnly": false,
+  "strataConceptSets": [],
+  "createdAt": "2020-01-13 11:57:21",
+  "updatedAt": "2020-01-13 12:02:40",
+  "skeletonType": "CohortCharacterizationStudy",
+  "skeletonVersion": "v0.0.1",
+  "packageName": null,
+  "organizationName": "OHDSI",
+  "stratifiedBy": null
+}
