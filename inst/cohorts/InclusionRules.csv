@@ -1,7 +1,2 @@
 "cohortName","ruleSequence","ruleName","cohortId"
-"csDMARD new users with rheumatoid arthritis",0,"has rheumatoid arthritis in prior 1 year",133
-"csDMARD new users with rheumatoid arthritis",1,"age >= 18",133
-"csDMARD new users with rheumatoid arthritis",2,"has no cancer prior to treatment",133
-"csDMARD new users with rheumatoid arthritis",3,"has no DMARD use prior to treatment",133
-"csDMARD new users with rheumatoid arthritis",4,"has only 1 DMARD on index date",133
-"csDMARD new users with rheumatoid arthritis",5,"has no other prior inflammatory arthritis",133
+"[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies",0,"do not have inflammatory arthropathies any time prior",155

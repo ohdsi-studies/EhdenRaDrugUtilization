@@ -1,0 +1,102 @@
+{
+  "cdmVersionRange": [">=5.0.0"],
+  "PrimaryCriteria": {
+    "CriteriaList": [
+      {
+        "ConditionOccurrence": {
+          "CodesetId": 2,
+          "First": true,
+          "ConditionTypeExclude": false
+        },
+        "Observation": {}
+      },
+      {
+        "ConditionOccurrence": {
+          "CodesetId": 1,
+          "First": true,
+          "ConditionTypeExclude": false
+        },
+        "Observation": {}
+      },
+      {
+        "ConditionOccurrence": {},
+        "Observation": {
+          "CodesetId": 2,
+          "ObservationTypeExclude": false
+        }
+      }
+    ],
+    "ObservationWindow": {
+      "PriorDays": [365],
+      "PostDays": [0]
+    },
+    "PrimaryCriteriaLimit": {
+      "Type": ["First"]
+    }
+  },
+  "ConceptSets": [
+    {
+      "id": 1,
+      "name": "[EHDEN RA] Inflammatory polyarthropathy",
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "CONCEPT_ID": 74125,
+              "CONCEPT_NAME": "Inflammatory polyarthropathy",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "417373000",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "name": "[EHDEN RA] Rheumatoid arthritis",
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "CONCEPT_ID": 80809,
+              "CONCEPT_NAME": "Rheumatoid arthritis",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "69896004",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          }
+        ]
+      }
+    }
+  ],
+  "QualifiedLimit": {
+    "Type": ["First"]
+  },
+  "ExpressionLimit": {
+    "Type": ["First"]
+  },
+  "InclusionRules": [],
+  "CensoringCriteria": [],
+  "CollapseSettings": {
+    "CollapseType": ["ERA"],
+    "EraPad": [0]
+  },
+  "CensorWindow": {}
+}

@@ -4,14 +4,23 @@
     "CriteriaList": [
       {
         "ConditionOccurrence": {
-          "CodesetId": 5,
+          "CodesetId": 0,
           "First": true,
           "ConditionTypeExclude": false
+        },
+        "Observation": {}
+      },
+      {
+        "ConditionOccurrence": {},
+        "Observation": {
+          "CodesetId": 0,
+          "First": true,
+          "ObservationTypeExclude": false
         }
       }
     ],
     "ObservationWindow": {
-      "PriorDays": [0],
+      "PriorDays": [365],
       "PostDays": [0]
     },
     "PrimaryCriteriaLimit": {
@@ -20,8 +29,8 @@
   },
   "ConceptSets": [
     {
-      "id": 5,
-      "name": "Rheumatoid arthritis",
+      "id": 0,
+      "name": "[EHDEN RA] Rheumatoid arthritis",
       "expression": {
         "items": [
           {
