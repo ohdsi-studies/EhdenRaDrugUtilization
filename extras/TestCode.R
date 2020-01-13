@@ -89,7 +89,6 @@ if (runDiagnostics) {
                                         inclusionStatisticsFolder = outputFolder,
                                         exportFolder = file.path(outputFolder,
                                                                  "feasibilityExport"),
-                                        runCohortOverlap = FALSE,
                                         databaseId = databaseId,
                                         databaseName = databaseName,
                                         databaseDescription = databaseDescription)
