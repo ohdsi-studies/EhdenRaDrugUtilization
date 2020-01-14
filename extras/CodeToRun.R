@@ -45,16 +45,12 @@ databaseDescription <- Sys.getenv("DATABASE_DESCRIPTION")
 # you have already generated the cohorts, you can then set this to 
 # FALSE to skip this step
 createCohorts <- TRUE
-
 # Run diagnostics?
 runDiagnostics <- TRUE
-
 # Censor any statistics with a minimum count of <= 5
 minCellCount <- 5
-
 # The folder to place the diagnostic output
 outputFolder <- "C:/EHDEN"
-
 # Optional: specify where the temporary files (used by the ff package) will be created:
 options(fftempdir = "C:/FFtemp")
   
