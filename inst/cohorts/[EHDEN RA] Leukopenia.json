@@ -4,51 +4,34 @@
     "CriteriaList": [
       {
         "ConditionOccurrence": {
-          "CodesetId": 2,
-          "First": true,
+          "CodesetId": 0,
           "ConditionTypeExclude": false
-        },
-        "Observation": {}
-      },
-      {
-        "ConditionOccurrence": {
-          "CodesetId": 1,
-          "First": true,
-          "ConditionTypeExclude": false
-        },
-        "Observation": {}
-      },
-      {
-        "ConditionOccurrence": {},
-        "Observation": {
-          "CodesetId": 2,
-          "ObservationTypeExclude": false
         }
       }
     ],
     "ObservationWindow": {
-      "PriorDays": [365],
+      "PriorDays": [0],
       "PostDays": [0]
     },
     "PrimaryCriteriaLimit": {
-      "Type": ["First"]
+      "Type": ["All"]
     }
   },
   "ConceptSets": [
     {
-      "id": 1,
-      "name": "[EHDEN RA] Inflammatory polyarthropathy",
+      "id": 0,
+      "name": "[EHDEN RA] Leukopenia",
       "expression": {
         "items": [
           {
             "concept": {
-              "CONCEPT_ID": 74125,
-              "CONCEPT_NAME": "Inflammatory polyarthropathy",
+              "CONCEPT_ID": 4170270,
+              "CONCEPT_NAME": "Decreased blood leukocyte number",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "417373000",
+              "CONCEPT_CODE": "419188005",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -56,24 +39,16 @@
             "isExcluded": false,
             "includeDescendants": true,
             "includeMapped": false
-          }
-        ]
-      }
-    },
-    {
-      "id": 2,
-      "name": "[EHDEN RA] Rheumatoid arthritis",
-      "expression": {
-        "items": [
+          },
           {
             "concept": {
-              "CONCEPT_ID": 80809,
-              "CONCEPT_NAME": "Rheumatoid arthritis",
+              "CONCEPT_ID": 435224,
+              "CONCEPT_NAME": "Leukopenia",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "69896004",
+              "CONCEPT_CODE": "84828003",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -90,13 +65,19 @@
     "Type": ["First"]
   },
   "ExpressionLimit": {
-    "Type": ["First"]
+    "Type": ["All"]
   },
   "InclusionRules": [],
+  "EndStrategy": {
+    "DateOffset": {
+      "DateField": ["StartDate"],
+      "Offset": [90]
+    }
+  },
   "CensoringCriteria": [],
   "CollapseSettings": {
     "CollapseType": ["ERA"],
-    "EraPad": [0]
+    "EraPad": [180]
   },
   "CensorWindow": {}
 }

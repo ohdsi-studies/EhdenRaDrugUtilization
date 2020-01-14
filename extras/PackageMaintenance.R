@@ -28,6 +28,6 @@ shell("R CMD Rd2pdf ./ --output=extras/EhdenRaDrugUtilization.pdf")
 ROhdsiWebApi::insertCohortDefinitionSetInPackage(fileName = "inst/settings/CohortsToCreate.csv",
                                                  baseUrl = Sys.getenv("baseUrl"),
                                                  insertTableSql = TRUE,
-                                                 insertCohortCreationR = TRUE,
+                                                 insertCohortCreationR = FALSE,
                                                  generateStats = TRUE,
                                                  packageName = "EhdenRaDrugUtilization")

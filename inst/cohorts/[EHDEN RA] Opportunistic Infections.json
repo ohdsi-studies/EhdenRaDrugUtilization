@@ -5,43 +5,33 @@
       {
         "ConditionOccurrence": {
           "CodesetId": 0,
-          "First": true,
           "ConditionTypeExclude": false
-        },
-        "Observation": {}
-      },
-      {
-        "ConditionOccurrence": {},
-        "Observation": {
-          "CodesetId": 0,
-          "First": true,
-          "ObservationTypeExclude": false
         }
       }
     ],
     "ObservationWindow": {
-      "PriorDays": [365],
+      "PriorDays": [0],
       "PostDays": [0]
     },
     "PrimaryCriteriaLimit": {
-      "Type": ["First"]
+      "Type": ["All"]
     }
   },
   "ConceptSets": [
     {
       "id": 0,
-      "name": "[EHDEN RA] Rheumatoid arthritis",
+      "name": "[EHDEN RA] Opportunistic Infections with tuberculosis",
       "expression": {
         "items": [
           {
             "concept": {
-              "CONCEPT_ID": 4297650,
-              "CONCEPT_NAME": "Cutaneous atrophy due to rheumatoid arthritis",
+              "CONCEPT_ID": 434281,
+              "CONCEPT_NAME": "Aspergillosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "402431009",
+              "CONCEPT_CODE": "65553006",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -52,13 +42,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 4334806,
-              "CONCEPT_NAME": "Deformity of foot due to rheumatoid arthritis",
+              "CONCEPT_ID": 433146,
+              "CONCEPT_NAME": "Blastomycosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "433228003",
+              "CONCEPT_CODE": "69996000",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -69,13 +59,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 46273442,
-              "CONCEPT_NAME": "Deformity of hand due to rheumatoid arthritis",
+              "CONCEPT_ID": 433415,
+              "CONCEPT_NAME": "Candidal endocarditis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "96531000119109",
+              "CONCEPT_CODE": "63553008",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -86,64 +76,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 2107572,
-              "CONCEPT_NAME": "Disease prognosis for rheumatoid arthritis assessed, good prognosis documented (RA)",
+              "CONCEPT_ID": 260041,
+              "CONCEPT_NAME": "Candidiasis of lung",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "3476F",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "CPT4",
-              "CONCEPT_CLASS_ID": "CPT4"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 2107561,
-              "CONCEPT_NAME": "Disease prognosis for rheumatoid arthritis assessed, poor prognosis documented (RA)",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "3475F",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "CPT4",
-              "CONCEPT_CLASS_ID": "CPT4"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 4058299,
-              "CONCEPT_NAME": "H/O: rheumatoid arthritis",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "161567008",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "SNOMED",
-              "CONCEPT_CLASS_ID": "Context-dependent"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 4107913,
-              "CONCEPT_NAME": "Myopathy due to rheumatoid arthritis",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "193250002",
+              "CONCEPT_CODE": "3487004",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -154,30 +93,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 2108721,
-              "CONCEPT_NAME": "Patient receiving first-time biologic disease modifying anti-rheumatic drug therapy for rheumatoid arthritis (RA)",
+              "CONCEPT_ID": 28974,
+              "CONCEPT_NAME": "Candidiasis of the esophagus",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "4195F",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "CPT4",
-              "CONCEPT_CLASS_ID": "CPT4"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 4102493,
-              "CONCEPT_NAME": "Polyneuropathy in rheumatoid arthritis",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "193180002",
+              "CONCEPT_CODE": "20639004",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -188,13 +110,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 80809,
-              "CONCEPT_NAME": "Rheumatoid arthritis",
+              "CONCEPT_ID": 437217,
+              "CONCEPT_NAME": "Coccidioidomycosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "69896004",
+              "CONCEPT_CODE": "60826002",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -205,64 +127,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 2107560,
-              "CONCEPT_NAME": "Rheumatoid arthritis (RA) disease activity, high (RA)",
+              "CONCEPT_ID": 443943,
+              "CONCEPT_NAME": "Herpes zoster",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "3472F",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "CPT4",
-              "CONCEPT_CLASS_ID": "CPT4"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 2107558,
-              "CONCEPT_NAME": "Rheumatoid arthritis (RA) disease activity, low (RA)",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "3470F",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "CPT4",
-              "CONCEPT_CLASS_ID": "CPT4"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 2107559,
-              "CONCEPT_NAME": "Rheumatoid arthritis (RA) disease activity, moderate (RA)",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "3471F",
-              "DOMAIN_ID": "Observation",
-              "VOCABULARY_ID": "CPT4",
-              "CONCEPT_CLASS_ID": "CPT4"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          },
-          {
-            "concept": {
-              "CONCEPT_ID": 4083556,
-              "CONCEPT_NAME": "Seronegative rheumatoid arthritis",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "239792003",
+              "CONCEPT_CODE": "4740000",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -273,38 +144,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 4035611,
-              "CONCEPT_NAME": "Seropositive rheumatoid arthritis",
+              "CONCEPT_ID": 433134,
+              "CONCEPT_NAME": "Histoplasmosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "239791005",
-              "DOMAIN_ID": "Condition",
-              "VOCABULARY_ID": "SNOMED",
-              "CONCEPT_CLASS_ID": "Clinical Finding"
-            },
-            "isExcluded": false,
-            "includeDescendants": true,
-            "includeMapped": false
-          }
-        ]
-      }
-    },
-    {
-      "id": 1,
-      "name": "[EHDEN RA] Inflammatory arthropathies",
-      "expression": {
-        "items": [
-          {
-            "concept": {
-              "CONCEPT_ID": 437082,
-              "CONCEPT_NAME": "Ankylosing spondylitis",
-              "STANDARD_CONCEPT": "S",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
-              "INVALID_REASON": "V",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "9631008",
+              "CONCEPT_CODE": "12962009",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -315,13 +161,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 4153359,
-              "CONCEPT_NAME": "Arthritis of spine",
+              "CONCEPT_ID": 438077,
+              "CONCEPT_NAME": "Invasive candidiasis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "371082009",
+              "CONCEPT_CODE": "70572005",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -332,13 +178,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 74125,
-              "CONCEPT_NAME": "Inflammatory polyarthropathy",
+              "CONCEPT_ID": 4097550,
+              "CONCEPT_NAME": "Legionella infection",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "417373000",
+              "CONCEPT_CODE": "26726000",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -349,13 +195,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 255891,
-              "CONCEPT_NAME": "Lupus erythematosus",
+              "CONCEPT_ID": 438059,
+              "CONCEPT_NAME": "Listeriosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "200936003",
+              "CONCEPT_CODE": "4241002",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -366,13 +212,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 4035610,
-              "CONCEPT_NAME": "Post-infective arthritis",
+              "CONCEPT_ID": 438350,
+              "CONCEPT_NAME": "Pneumocystosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "239783001",
+              "CONCEPT_CODE": "88860002",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -383,13 +229,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 81931,
-              "CONCEPT_NAME": "Psoriasis with arthropathy",
+              "CONCEPT_ID": 440035,
+              "CONCEPT_NAME": "Cryptococcosis",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "33339001",
+              "CONCEPT_CODE": "42386007",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -400,13 +246,13 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 254443,
-              "CONCEPT_NAME": "Sjögren's syndrome",
+              "CONCEPT_ID": 436040,
+              "CONCEPT_NAME": "Infection by Strongyloides",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "83901003",
+              "CONCEPT_CODE": "1214006",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -417,13 +263,149 @@
           },
           {
             "concept": {
-              "CONCEPT_ID": 134442,
-              "CONCEPT_NAME": "Systemic sclerosis",
+              "CONCEPT_ID": 4029319,
+              "CONCEPT_NAME": "Disseminated herpes simplex",
               "STANDARD_CONCEPT": "S",
               "STANDARD_CONCEPT_CAPTION": "Standard",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "89155008",
+              "CONCEPT_CODE": "13710008",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 4051338,
+              "CONCEPT_NAME": "Herpes simplex pneumonia",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "233624006",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 45757252,
+              "CONCEPT_NAME": "Herpes simplex hepatitis",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "1087101000119109",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 440330,
+              "CONCEPT_NAME": "Bartonellosis",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "266123003",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 433957,
+              "CONCEPT_NAME": "Progressive multifocal leukoencephalopathy",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "22255007",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 4329093,
+              "CONCEPT_NAME": "Disease due to BK polyomavirus",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "431258001",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 434557,
+              "CONCEPT_NAME": "Tuberculosis",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "56717001",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 4174281,
+              "CONCEPT_NAME": "Non-tuberculous mycobacterial pneumonia",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "277869007",
+              "DOMAIN_ID": "Condition",
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding"
+            },
+            "isExcluded": false,
+            "includeDescendants": true,
+            "includeMapped": false
+          },
+          {
+            "concept": {
+              "CONCEPT_ID": 440631,
+              "CONCEPT_NAME": "Mycobacteriosis",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "88415009",
               "DOMAIN_ID": "Condition",
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding"
@@ -440,50 +422,19 @@
     "Type": ["First"]
   },
   "ExpressionLimit": {
-    "Type": ["First"]
+    "Type": ["All"]
   },
-  "InclusionRules": [
-    {
-      "name": "do not have inflammatory arthropathies any time prior",
-      "expression": {
-        "Type": "ALL",
-        "CriteriaList": [
-          {
-            "Criteria": {
-              "ConditionOccurrence": {
-                "CodesetId": 1,
-                "ConditionTypeExclude": false
-              }
-            },
-            "StartWindow": {
-              "Start": {
-                "Coeff": -1
-              },
-              "End": {
-                "Days": 0,
-                "Coeff": 1
-              },
-              "UseIndexEnd": false,
-              "UseEventEnd": false
-            },
-            "RestrictVisit": false,
-            "IgnoreObservationPeriod": true,
-            "Occurrence": {
-              "Type": 0,
-              "Count": 0,
-              "IsDistinct": false
-            }
-          }
-        ],
-        "DemographicCriteriaList": [],
-        "Groups": []
-      }
+  "InclusionRules": [],
+  "EndStrategy": {
+    "DateOffset": {
+      "DateField": ["StartDate"],
+      "Offset": [7]
     }
-  ],
+  },
   "CensoringCriteria": [],
   "CollapseSettings": {
     "CollapseType": ["ERA"],
-    "EraPad": [0]
+    "EraPad": [180]
   },
   "CensorWindow": {}
 }
