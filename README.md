@@ -24,7 +24,7 @@ ATLAS Pathways Characterizations
 
 This study includes a pathways analysis designed using [ATLAS](https://github.com/OHDSI/Atlas). At the time of this study, the design was done using Atlas 2.7.4. 
 
-The pathway design specification for the study is located in `\inst\characterization\Pathways-Analysis.json`. Copy this JSON into your ATLAS environment to run against your CDM data. When complete, contact the study lead to provide results (for now, a screen shot of the full results but later we will provide a data extraction mechanism).
+The pathway design specification for the study is located in `\inst\characterization\Pathways-Analysis.json`. Copy this JSON into your ATLAS environment to run against your CDM data. When complete, use the code in `extras\ExportPathwaysResults.R` to export the 2 JSON files for your analysis. ZIP the output folder and send to the study coordinator.
 
 Running Cohort Stability Diagnostics
 ====================================
@@ -83,6 +83,7 @@ DATABASE_DESCRIPTION = "<Description of your database>"
 CDM_SCHEMA = "<your cdm schema>"
 RESULTS_SCHEMA = "<your results schema **SEE NOTE**>"
 COHORT_TABLE  = "<a name for the cohort table to hold the cohorts for this study>"
+baseUrl = "https://yourserver:8080/WebAPI"
 ````
 **NOTE:** The user account used to connect the results schema requires ownership privilege to create the cohort table.
 

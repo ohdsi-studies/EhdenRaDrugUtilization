@@ -1,5 +1,8 @@
-# Step 0 - Install all OHDSI R Packages (uncomment and run this the 1st time only)
+## Step 0 - Install all R Packages (uncomment and run these commands once)
+#
 # install.packages("devtools")
+# install.packages("httr")
+# install.packages("jsonlite")
 # devtools::install_github("ohdsi/SqlRender")
 # devtools::install_github("ohdsi/ROhdsiWebApi")
 # devtools::install_github("ohdsi/FeatureExtraction")
@@ -11,7 +14,8 @@
 # devtools::install_github("ohdsi/OhdsiRTools")
 # devtools::install_github("ohdsi/BigKnn")
 # devtools::install_github("ohdsi/PatientLevelPrediction")
-
+#
+## Step 0 - END
 
 # Step 1 - Set the parameters to run the study diagnostics ------------------
 

@@ -13,7 +13,9 @@ VignetteBuilder: knitr
 Imports:
     ROhdsiWebApi,
     FeatureExtraction,
-    StudyDiagnostics
+    StudyDiagnostics,
+    httr,
+    jsonlite
 Suggests:
   testthat,
   knitr,

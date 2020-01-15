@@ -1,18 +1,5 @@
 "cohortName","ruleSequence","ruleName","cohortId"
-"[EHDEN DA] Persons with a Malignant neoplasm of ovary 1 dx",0,"no prior cancer",215
-"[EHDEN RA] Persons with a Malignant melanoma 1 dx",0,"no prior cancer",207
-"[EHDEN RA] Persons with a Malignant neoplasm of bladder 1 dx",0,"no prior cancer",217
-"[EHDEN RA] Persons with a Malignant neoplasm of brain 1 dx",0,"no prior cancer",211
-"[EHDEN RA] Persons with a Malignant neoplasm of breast 1 dx",0,"no prior cancer",206
-"[EHDEN RA] Persons with a Malignant neoplasm of colon and rectum 1 dx",0,"no prior cancer",218
-"[EHDEN RA] Persons with a Malignant neoplasm of kidney 1 dx",0,"no prior cancer",213
-"[EHDEN RA] Persons with a Malignant neoplasm of leukemia 1 dx",0,"no prior cancer",212
-"[EHDEN RA] Persons with a Malignant neoplasm of liver 1 dx",0,"no prior cancer",209
-"[EHDEN RA] Persons with a Malignant neoplasm of lung 1 dx",0,"no prior cancer",201
-"[EHDEN RA] Persons with a Malignant neoplasm of lymphoma 1 dx",0,"no prior cancer",216
-"[EHDEN RA] Persons with a Malignant neoplasm of multiple myeloma 1 dx",0,"no prior cancer",220
-"[EHDEN RA] Persons with a Malignant neoplasm of pancreas 1 dx",0,"no prior cancer",210
-"[EHDEN RA] Persons with a Malignant neoplasm of prostate 1 dx",0,"no prior cancer",222
-"[EHDEN RA] Persons with a Malignant neoplasm of thyroid 1 dx",0,"no prior cancer",214
-"[EHDEN RA] Persons with a Malignant neoplasm of uterus 1 dx",0,"no prior cancer",208
-"[EHDEN RA] Persons with Malignant tumor of stomach 1 dx",0,"no prior cancer",228
+"[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies",0,"has rheumatoid arthritis record on or in 30d of index",155
+"[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies",1,"age >= 18",155
+"[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies",2,"do not have inflammatory arthropathies any time prior",155
+"[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies",3,"no prior rheumatoid arthritis anytime in history",155
