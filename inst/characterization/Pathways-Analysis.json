@@ -1238,7 +1238,7 @@
                 "OccurrenceStartDate": {
                   "Value": "2000-01-01",
                   "Op": "bt",
-                  "Extent": "2020-01-14"
+                  "Extent": "2009-12-31"
                 },
                 "ObservationTypeExclude": false
               }
@@ -1250,7 +1250,7 @@
                 "OccurrenceStartDate": {
                   "Value": "2000-01-01",
                   "Op": "bt",
-                  "Extent": "2009-01-01"
+                  "Extent": "2009-12-31"
                 },
                 "DrugTypeExclude": false
               }
@@ -2436,7 +2436,7 @@
                 "First": true,
                 "OccurrenceStartDate": {
                   "Value": "2010-01-01",
-                  "Op": "lte"
+                  "Op": "gte"
                 },
                 "ConditionTypeExclude": false
               }
@@ -2458,7 +2458,7 @@
                 "First": true,
                 "OccurrenceStartDate": {
                   "Value": "2010-01-01",
-                  "Op": "lt"
+                  "Op": "gte"
                 },
                 "DrugTypeExclude": false
               }
@@ -3666,7 +3666,7 @@
                 "First": true,
                 "OccurrenceStartDate": {
                   "Value": "2010-01-01",
-                  "Op": "eq"
+                  "Op": "gte"
                 },
                 "DrugTypeExclude": false
               }
