@@ -13,7 +13,7 @@
 # The results will consist of 2 JSON files. Zip these and send to the study coordinator
 
 pathwaysResultsId <- 925
-ouptutFolder <- "C:/EHDEN/my_database_name"
+outputFolder <- "C:/EHDEN/my_database_name"
 
 EhdenRaDrugUtilization::exportPathwaysResults(Sys.getenv("baseUrl"),
                                               pathwayResultsId = pathwaysResultsId,
