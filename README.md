@@ -3,19 +3,16 @@ Rheumatoid arthritis (RA) Drug Utilization 2020 (EHDEN Study-a-thon Barcelona 20
 
 <img src="https://img.shields.io/badge/Study%20Status-Started-blue.svg" alt="Study Status: Started">
 
-- Analytics use case(s): Characterization
-- Study type: Clinical Application
-- Tags: Rheumatoid arthritis, Drug Utilization, EHDEN
-- Study lead: Anthony G. Sena
-- Study lead forums tag: [Anthony G Sena](https://forums.ohdsi.org/u/anthonysena/)
-- Study start date: January 12, 2020
+- Analytics use case(s): **Characterization**
+- Study type: **Clinical Application**
+- Tags: **Rheumatoid arthritis, Drug Utilization, EHDEN**
+- Study lead: **Anthony G. Sena**
+- Study lead forums tag: **[Anthony G Sena](https://forums.ohdsi.org/u/anthonysena/)**
+- Study start date: **January 12, 2020**
 - Study end date: **-**
 - Protocol: **-**
 - Publications: **-**
 - Results explorer: **-**
-
-Description
-===========
 
 We aim to characterize the treatment pathways of newly diagnosed RA patients from 2000-2018 across the OHDSI Network. The instructions below aim to provide a guide for running the different analyses in the study.
 
