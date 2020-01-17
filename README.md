@@ -10,7 +10,7 @@ Rheumatoid arthritis (RA) Drug Utilization 2020 (EHDEN Study-a-thon Barcelona 20
 - Study lead forums tag: **[Anthony G Sena](https://forums.ohdsi.org/u/anthonysena/)**
 - Study start date: **January 12, 2020**
 - Study end date: **-**
-- Protocol: **-**
+- Protocol: [**Word file**](https://github.com/ohdsi-studies/EhdenRaDrugUtilization/blob/master/extras/Barcelona%20studyathon%20protocol.docx)
 - Publications: **-**
 - Results explorer: **-**
 
