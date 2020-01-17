@@ -57,7 +57,7 @@ runDiagnostics <- TRUE
 minCellCount <- 5
 
 # The folder to place the diagnostic output
-outputFolder <- "C:/EHDEN"
+outputFolder <- "C:/EHDEN/Diagnostics"
 
 # Optional: specify where the temporary files (used by the ff package) will be created:
 options(fftempdir = "C:/FFtemp")
@@ -98,6 +98,7 @@ if (runDiagnostics) {
                                         inclusionStatisticsFolder = outputFolder,
                                         exportFolder = file.path(outputFolder,
                                                                  "feasibilityExport"),
+                                        runCohortOverlap = FALSE,
                                         databaseId = databaseId,
                                         databaseName = databaseName,
                                         databaseDescription = databaseDescription)

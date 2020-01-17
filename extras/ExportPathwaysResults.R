@@ -15,6 +15,10 @@
 pathwaysResultsId <- 925
 outputFolder <- "C:/EHDEN/my_database_name"
 
+if (!file.exists(outputFolder))
+  dir.create(outputFolder, recursive = TRUE)
+
+
 EhdenRaDrugUtilization::exportPathwaysResults(Sys.getenv("baseUrl"),
                                               pathwayResultsId = pathwaysResultsId,
                                               outputFolder=outputFolder)
