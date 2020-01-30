@@ -1,0 +1,343 @@
+<!-- put this in the root directory of Atlas, since the moduels loaded are based on relative paths -->
+<!-- Note: this requires that you can access CDN services (ie: a connection to the internet) -->
+<html>
+<head>
+	<title>Pathway Results Viewer</title>
+	<style>
+		.dataTables_paginate .paginate_button {
+			padding:.2em .2em !important
+		}
+		
+		td.stat {
+			text-align: right;
+		}
+		
+		body { 
+			overflow: auto !important;
+		}
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="js/styles/atlas.css">
+	
+</head>
+
+<script>
+  // set this to your WebAPI path
+	const webAPIPath = 'http://localhost/pathways/results/';
+	const yearCohortPrefix = "[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies with 1 yr follow-up in";
+	const MIN_CELL_COUNT = 10;
+</script>
+
+<body>
+	<div id="container" style="display:none"></div>
+	<div>
+		Generation Id: <input type="text" data-bind="textInput: generationId"><button data-bind="click: loadData">Load</button>
+	</div>
+	<div style="padding-top: 5px">
+		Maximum Path Length: <select data-bind="options: pathLengthOptions,
+																						 value: pathLength"></select>
+	</div>
+	<hr/>
+	
+	<div data-bind="if: reportData">
+		<!--<div data-bind="foreach: reportData().cohorts">-->
+			<div><span style="font-size: 1.2em; font-weight: bold" data-bind="text: name"></span><button data-bind="click: exportCohortReport">Export</button></div>
+			<!--<span data-bind="text: ko.toJSON(reportData().cohorts)"></span>-->
+			<table data-bind="dynamicDataTable: getDataTableBindingData(reportData().cohorts)">
+			</table>
+		<!--</div>-->
+	</div>
+	
+	<div data-bind="ifnot: reportData">
+		No generation loaded.
+	</div>
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+	<script>
+	
+		define("appConfig", [], function() {
+
+			const appConfig = {};
+			appConfig.xssOptions = {
+				"whiteList": {
+					"a": ["href", "class", "data-bind"],
+					"button": ["class", "type"],
+					"span": ["class", "data-bind"],
+					"i": ["class", "id", "aria-hidden"],
+					"div": ["class", "style", "id"],
+					"option": ["value"],
+					"input": ["type", "class"],
+					"ui": ["class"],
+					"path": ["d", "class"],
+					"br": "",
+				},
+				"stripIgnoreTag": true,
+				"stripIgnoreTagBody": ['script'],
+			};
+			return appConfig;
+		});
+		
+		requirejs.config({
+			paths: {
+				"optional":"js/extensions/plugins/optional",
+				"css": "js/extensions/plugins/css",
+				"jquery": "https://code.jquery.com/jquery-1.11.2.min",
+				"knockout": "https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min",
+				"ko-bindings": "js/extensions/bindings",
+				"datatables.net": "https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min",
+				"datatables.net-buttons": "https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min",
+				"datatables.net-buttons-html5": "https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min",
+				"colvis": "https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min",
+//				"numeral": "https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min",
+//				"d3": "https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.min",
+//				"d3-tip": "https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min",
+//				"lodash": "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min",
+				"moment": "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min",
+				"xss": "https://unpkg.com/xss@1.0.3/dist/xss.min",
+				"file-saver": "node_modules/file-saver/FileSaver",
+				"atlasServices": "js/services",
+				'atlasutils': "js/utils"
+				
+			},
+			map : {
+				"*": {
+					"services/MomentAPI": "atlasServices/MomentAPI"
+				}
+			},
+			shim: {
+				"xss": {
+					exports: "filterXSS"
+				},				
+			}
+		});
+	
+		requirejs(['jquery', 'knockout', 'atlasutils/CsvUtils',
+							'ko-bindings/datatableBinding',
+							'css!https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css',
+							'css!https://cdn.datatables.net/buttons/1.5.6/css/buttons.jqueryui.min.css'], function($,ko,CsvUtils) {
+			
+			// re-wire update on binding to rebuild table
+			ko.bindingHandlers.dynamicDataTable = {
+				init: ko.bindingHandlers.dataTable.init,
+				update: (element, valueAccessor) => {
+					var table = $(element).DataTable();
+					table.destroy();
+					$(element).empty();
+					$(element).DataTable(valueAccessor().options);
+					ko.bindingHandlers.dataTable.update(element, valueAccessor);
+				}
+			}
+			const MAX_PATH_LENGTH = 10;
+			const DEFAULT_PATH_LENGTH = 5;
+			const PATH_LENGTH_OPTIONS = Array(MAX_PATH_LENGTH).fill().map((v,i)=>i + 1);
+			
+			function columnPathBuilder (label, field, resolver) {
+				return {
+					title: label,
+					data: (d) => resolver ? resolver(d.path[field]) : d.paths[field],
+					defaultContent: ''
+				};
+			}
+			
+			function columnValueBuilder (label, field, formatter) {
+				return {
+					title: label,
+					data: (d) => formatter ? formatter(d[field]) : d[field],
+					defaultContent: ''
+				};
+			}
+			
+			function percentFormat(v) {
+				return `${v.toFixed(2)}%`;
+			}
+
+			function getYearFromCohortName(name) {
+				// HACK ALERT: Cohort name will be something like:
+				// "[EHDEN RA] Patients with rheumatoid arthritis excluding inflammatory arthropathies with 1 yr follow-up in 2010 for cohort pathway"
+				// and the 14th element is the year
+				return name.split(" ")[14];
+			}
+
+			function getPathwayGroupData(year, totalCohortCount, totalCohortWithPathCount, pathways, pathLength)
+			{
+				let data = pathways.map(p => ({
+					path : p.path["0"].split('-',pathLength)
+						.map(p => +p)																		
+						.concat(Array(MAX_PATH_LENGTH).fill(null))
+						.slice(0,pathLength),
+					personCount: p.personCount,
+					database: generationId(),
+					totalCohortCount: totalCohortCount,
+					totalCohortWithPathCount: totalCohortWithPathCount,
+					year: year
+				}));
+
+				// Remove any cohorts or cohorts with pathways or paths < MIN CELL COUNT
+				//data = data.filter(p => p.totalCohortCount >= MIN_CELL_COUNT && p.totalCohortWithPathCount >= MIN_CELL_COUNT && p.personCount >= MIN_CELL_COUNT);
+				
+				let groups = data.reduce((acc,cur) => {
+					const key = JSON.stringify(cur.path);
+					if (!acc.has(key)) {
+						acc.set(key, cur);
+					} else {
+						acc.get(key).personCount += cur.personCount;
+					}
+					return acc;
+				}, new Map()).values();
+				
+				return Array.from(groups);
+			}
+			
+			var reportModel = function() {
+				var self = this;
+				
+				const pathCodeResolver = function(d) {
+					return self.reportData().eventCodes
+						.filter(ec => ec.isCombo == false && (ec.code & d) > 0)
+						.map(ec => ec.name)
+						.join(' + ');
+				}
+				// model properties
+				
+				self.pathwayData = ko.observableArray([]);
+				self.generationId = ko.observable("Estonia");
+				self.reportData = ko.observable(null);
+				self.pathLength = ko.observable(DEFAULT_PATH_LENGTH);
+				self.pathLengthOptions = PATH_LENGTH_OPTIONS;
+				
+				
+				// behaviors
+				self.loadData = async function() {
+					try {
+						let  pathwayInfo = await Promise.all([$.get(`${webAPIPath}${self.generationId()}/ra-pathway-result.json`),$.get(`${webAPIPath}${self.generationId()}/ra-pathway-design.json`)]);
+						let result = pathwayInfo[0];
+						let design =  pathwayInfo[1];
+
+						let cohorts = design.targetCohorts.map(c => {
+							const pathwayGroup = result.pathwayGroups.find(p => p.targetCohortId[0] == c.id[0]);
+							//console.log(pathwayGroup);
+							if (pathwayGroup !== undefined && c.name[0].startsWith(yearCohortPrefix)) {
+								//console.log(c);
+								return {
+									id: c.id[0], 
+									name: c.name[0], 
+									cohortCount: pathwayGroup.targetCohortCount, 
+									pathwayCount: pathwayGroup.totalPathwaysCount,
+									pathways: pathwayGroup.pathways
+								}
+							}
+						});
+						
+						// Remove empty elements
+						cohorts = cohorts.filter(function (el) {
+						  return el !== undefined;
+						});
+						//console.log(cohorts);
+
+						// Hack because jsonlite turns everything
+						// into an array
+						let eventCodes = result.eventCodes.map(c => {
+							return {
+								isCombo: c.isCombo[0],
+								code: c.code[0],
+								name: c.name[0]
+							}
+						});
+
+						self.reportData({
+							cohorts: cohorts,
+							eventCodes: eventCodes
+						});
+						console.log(reportData())
+					}
+					catch (e) {
+						console.log(e);
+						self.reportData(null);
+					}
+				}
+				
+				self.getDataTableBindingData = function(cohorts) {
+					let pathCols = Array(MAX_PATH_LENGTH)
+						.fill()
+						.map((v,i) => {
+							const col = columnPathBuilder(`Step ${i+1}`, i, pathCodeResolver);
+							col.visible = i < self.pathLength();
+							return col;
+						});					
+					let statCols = [columnValueBuilder("Path Person Count", "personCount")];
+					statCols.push(columnValueBuilder("% with Pathway", "pathwayPercent", percentFormat));
+					statCols.push(columnValueBuilder("% of Cohort", "cohortPercent", percentFormat));
+					let tCohortCols = [columnValueBuilder("Database", "database")];
+					tCohortCols.push(columnValueBuilder("Year", "year"));
+					tCohortCols.push(columnValueBuilder("Total Cohort Count", "totalCohortCount"));
+					tCohortCols.push(columnValueBuilder("Total Cohort With Path Count", "totalCohortWithPathCount"));
+
+
+					var data = [];
+					// 'data' is based on a group-by sum of the specified path lengths
+					cohorts.forEach(pathwayGroup => {
+						cohortData = getPathwayGroupData(getYearFromCohortName(pathwayGroup.name), pathwayGroup.cohortCount, pathwayGroup.pathwayCount, pathwayGroup.pathways, self.pathLength());
+						// add columns for % of Paths and % of cohort
+						cohortData.forEach(row => {
+							row.pathwayPercent = 100.0 * row.personCount / pathwayGroup.pathwayCount;
+							row.cohortPercent = 100.0 * row.personCount / pathwayGroup.cohortCount;
+						});
+
+						data = data.concat(cohortData);
+					});
+					
+					return {
+						data: data, //data,
+						options: {
+							autoWidth:true,
+							order: [[pathCols.length, 'desc']],
+							columnDefs: statCols.map((c,i) => ({width: "7%", targets: pathCols.length + i, className: 'stat'})),
+							columns :  [...tCohortCols, ...pathCols, ...statCols]
+						}
+					};
+				}
+
+				self.exportCohortReport = function(d) {
+					/*
+					const rawData = getPathwayGroupData(d.pathways, self.pathLength());
+					const csvData = rawData.map(row => {
+						const newRow = {};
+						row.path.forEach((p,i) => {
+							newRow[`Step ${i + 1}`] = pathCodeResolver(p);
+						});
+						newRow['personCount'] = row.personCount;
+						newRow['pathwayPercent'] = percentFormat(100.0 * row.personCount / d.pathwayCount);
+						newRow['cohortPercent'] = percentFormat(100.0 * row.personCount / d.cohortCount);
+						
+						return newRow;
+					});
+					csvData.sort((a,b) => b.personCount - a.personCount);
+					*/
+					const rawData = getDataTableBindingData(reportData().cohorts).data;
+					const csvData = rawData.map(row => {
+						const newRow = {};
+						newRow['database'] = row.database;
+						newRow['year'] = row.year;
+						newRow['totalCohortCount'] = row.totalCohortCount;
+						newRow['totalCohortWithPathCount'] = row.totalCohortWithPathCount;
+						row.path.forEach((p,i) => {
+							newRow[`Step ${i + 1}`] = pathCodeResolver(p);
+						});
+						newRow['personCount'] = row.personCount;
+						newRow['pathwayPercent'] = percentFormat(100.0 * row.personCount / row.totalCohortWithPathCount);
+						newRow['cohortPercent'] = percentFormat(100.0 * row.personCount / row.totalCohortCount);
+						
+						return newRow;
+					});
+					csvData.sort((a, b) => b.year - a.year).sort((a,b) => b.personCount - a.personCount);
+					//console.log(csvData);
+					CsvUtils.saveAsCsv(csvData, generationId() + ".csv");
+				}
+			}
+			ko.applyBindings(reportModel);
+			
+		});
+	</script>
+</body>
+</html>
