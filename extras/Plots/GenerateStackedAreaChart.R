@@ -17,20 +17,20 @@ srDbConnectionDetails <-
 
 srDbConnection <- DatabaseConnector::connect(srDbConnectionDetails)
 
-# Get a summary of patients per DB
-sql <- "select a.database, sum(a.totalcohortcount) total_cohort_count, sum(a.totalcohortwithpathcount) with_path_count,
-        min(year) min_year, max(year) max_year
-        from (
-        SELECT distinct database, year, totalcohortcount, totalcohortwithpathcount
-        FROM network_pathways_results
-        WHERE database NOT IN ('Hospital', 'Germany')
-        ) a
-        group by a.database
-        order by a.database
-        ;"
-studySummary <- DatabaseConnector::querySql(connection = srDbConnection, sql = sql)
-studySummary$pct_with_path <- studySummary$WITH_PATH_COUNT / studySummary$TOTAL_COHORT_COUNT
-write.csv(studySummary, file="studySummary.csv")
+# # Get a summary of patients per DB
+# sql <- "select a.database, sum(a.totalcohortcount) total_cohort_count, sum(a.totalcohortwithpathcount) with_path_count,
+#         min(year) min_year, max(year) max_year
+#         from (
+#         SELECT distinct database, year, totalcohortcount, totalcohortwithpathcount
+#         FROM network_pathways_results
+#         WHERE database NOT IN ('Hospital', 'Germany')
+#         ) a
+#         group by a.database
+#         order by a.database
+#         ;"
+# studySummary <- DatabaseConnector::querySql(connection = srDbConnection, sql = sql)
+# studySummary$pct_with_path <- studySummary$WITH_PATH_COUNT / studySummary$TOTAL_COHORT_COUNT
+# write.csv(studySummary, file="studySummary.csv")
 
 
 # Get the full results set for plotting
@@ -114,8 +114,8 @@ data$DATABASE[data$DATABASE == "Optum_Panther"] <- formatDbName("OPTUM EHR - EMR
 data$DATABASE[data$DATABASE == "SIDIAP"] <- formatDbName("SIDIAP - EMR, ES", "SIDIAP", countByDB)
 data$DATABASE[data$DATABASE == "THIN"] <- formatDbName("IQVIA THIN - EMR, UK", "THIN", countByDB)
 
-# IPCI has some strange data in 2000-2001 so I'm taking that out
-data <- data[!(data$DB_KEY == "IPCI" & data$YEAR < 2002), ]
+# Limit to data >= 2008
+data <- data[data$YEAR >= 2008, ]
 
 
 # data %>% group_by(DATABASE) %>% summarise(n = sum(n)) %>% arrange(DATABASE)
@@ -140,12 +140,17 @@ treatmentsForSecularTrends <- c("methotrexate", "sulfasalazine", "leflunomide", 
 otherDrugsRolledUp <- data[!data$group %in% treatmentsForSecularTrends,] %>%
   group_by(DATABASE, DB_KEY, YEAR) %>% 
   summarise(group = "Other", n = sum(n), percentage = sum(percentage))
+otherDrugsRolledUp <- otherDrugsRolledUp[otherDrugsRolledUp$n >= 5,] # Censor small cell counts
 dataForStackedBar <- rbind(data[data$group %in% treatmentsForSecularTrends, ], 
                            otherDrugsRolledUp)
 my.levels <- c("methotrexate", "sulfasalazine", "leflunomide", "hydroxychloroquine", "Other")
 dataForStackedBar <- dataForStackedBar %>%
   arrange(desc(DATABASE), YEAR, factor(group, my.levels))
 dataForStackedBar$group <- factor(dataForStackedBar$group, levels = rev(unique(dataForStackedBar$group)))
+
+# Eliminate some problematic dates for Estonia & Australia
+dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Estonia' & dataForStackedBar$YEAR < 2012),]
+dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Australia' & dataForStackedBar$YEAR < 2009),]
 
 
 #For plotting
@@ -170,9 +175,13 @@ usaDbs <- c("CCAE", "MDCR", "MDCD", "AmbEMR", "Optum_Panther", "Optum_DOD")
 eurDbs <- c("THIN", "SIDIAP", "IPCI", "France", "Estonia", "Belgium")
 apDbs <- c("JMDC", "Australia")
 usaPlot <- stackedBarChart(dataForStackedBar[dataForStackedBar$DB_KEY %in% usaDbs,], 2, 3, F)
+usaPlot
 eurPlot <- stackedBarChart(dataForStackedBar[dataForStackedBar$DB_KEY %in% eurDbs,], 2, 3, F)
+eurPlot
 apPlot <- stackedBarChart(dataForStackedBar[dataForStackedBar$DB_KEY %in% apDbs,], 1, 3, T)
-gridExtra::grid.arrange(usaPlot, eurPlot, apPlot)
+apPlot
+
+#gridExtra::grid.arrange(usaPlot, eurPlot, apPlot)
 
 # Try facet grid vs wrap
 dataForStackedBar$countryGroup <- dataForStackedBar$DB_KEY
