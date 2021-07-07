@@ -1,7 +1,7 @@
 Rheumatoid arthritis (RA) Drug Utilization 2020 (EHDEN Study-a-thon Barcelona 2020)
 =============
 
-<img src="https://img.shields.io/badge/Study%20Status-Started-blue.svg" alt="Study Status: Started">
+<img src="https://img.shields.io/badge/Study%20Status-Results%20Available-yellow.svg" alt="Study Status: Results Available">
 
 - Analytics use case(s): **Characterization**
 - Study type: **Clinical Application**
@@ -12,7 +12,7 @@ Rheumatoid arthritis (RA) Drug Utilization 2020 (EHDEN Study-a-thon Barcelona 20
 - Study end date: **-**
 - Protocol: [**Word file**](https://github.com/ohdsi-studies/EhdenRaDrugUtilization/blob/master/extras/Barcelona%20studyathon%20protocol.docx)
 - Publications: **-**
-- Results explorer: **-**
+- Results explorer: https://data.ohdsi.org/EhdenRaDrugUtilization/
 
 We aim to characterize the treatment pathways of newly diagnosed RA patients from 2000-2018 across the OHDSI Network. The instructions below aim to provide a guide for running the different analyses in the study.
 
