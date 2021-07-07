@@ -5,29 +5,29 @@ AmbEMR,methotrexate,28023,84137,0.333063931445143,33.3
 AmbEMR,methotrexate +  hydroxychloroquine,3262,84137,0.03877010114456184,3.9
 AmbEMR,sulfasalazine,2840,84137,0.03375447187325434,3.4
 AmbEMR,Other DMARDs & Minocycline,26461,84137,0.31449897191485315,31.4
-Australia,methotrexate +  hydroxychloroquine,16,539,0.029684601113172542,3
-Australia,leflunomide,61,539,0.11317254174397032,11.3
-Australia,methotrexate,198,539,0.3673469387755102,36.7
-Australia,hydroxychloroquine,163,539,0.30241187384044527,30.2
-Australia,Other DMARDs & Minocycline,37,539,0.0686456400742115,6.9
-Australia,sulfasalazine,64,539,0.11873840445269017,11.9
-Belgium,methotrexate,522,775,0.6735483870967742,67.4
-Belgium,Other DMARDs & Minocycline,46,775,0.05935483870967742,5.9
-Belgium,leflunomide,69,775,0.08903225806451613,8.9
-Belgium,sulfasalazine,60,775,0.07741935483870968,7.7
-Belgium,hydroxychloroquine,78,775,0.10064516129032258,10.1
+Australia,methotrexate +  hydroxychloroquine,16,538,0.02973977695167286,3
+Australia,leflunomide,60,538,0.11152416356877323,11.2
+Australia,methotrexate,198,538,0.3680297397769517,36.8
+Australia,hydroxychloroquine,163,538,0.30297397769516726,30.3
+Australia,Other DMARDs & Minocycline,37,538,0.0687732342007435,6.9
+Australia,sulfasalazine,64,538,0.11895910780669144,11.9
+Belgium,methotrexate,520,772,0.6735751295336787,67.4
+Belgium,Other DMARDs & Minocycline,46,772,0.05958549222797927,6
+Belgium,leflunomide,68,772,0.08808290155440414,8.8
+Belgium,sulfasalazine,60,772,0.07772020725388601,7.8
+Belgium,hydroxychloroquine,78,772,0.10103626943005181,10.1
 CCAE,Other DMARDs & Minocycline,7170,51418,0.13944533042903262,13.9
 CCAE,methotrexate +  hydroxychloroquine,1779,51418,0.03459877863783111,3.5
 CCAE,hydroxychloroquine,15307,51418,0.29769730444591386,29.8
 CCAE,sulfasalazine,3068,51418,0.05966782060756933,6
 CCAE,methotrexate,22705,51418,0.44157687969193665,44.2
 CCAE,leflunomide,1389,51418,0.027013886187716364,2.7
-Estonia,methotrexate +  hydroxychloroquine,81,1837,0.04409363091997823,4.4
-Estonia,Other DMARDs & Minocycline,170,1837,0.09254218835057158,9.3
-Estonia,sulfasalazine,234,1837,0.12738160043549265,12.7
-Estonia,methotrexate,890,1837,0.4844855743059336,48.4
-Estonia,leflunomide,106,1837,0.05770277626565052,5.8
-Estonia,hydroxychloroquine,356,1837,0.19379422972237342,19.4
+Estonia,methotrexate +  hydroxychloroquine,81,1831,0.04423812124522119,4.4
+Estonia,Other DMARDs & Minocycline,170,1831,0.09284543965046423,9.3
+Estonia,sulfasalazine,234,1831,0.127799016930639,12.8
+Estonia,methotrexate,884,1831,0.482796286182414,48.3
+Estonia,leflunomide,106,1831,0.05789186237028946,5.8
+Estonia,hydroxychloroquine,356,1831,0.19442927362097215,19.4
 France,Other DMARDs & Minocycline,15,337,0.04451038575667656,4.5
 France,sulfasalazine,18,337,0.05341246290801187,5.3
 France,methotrexate,251,337,0.744807121661721,74.5

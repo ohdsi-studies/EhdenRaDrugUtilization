@@ -29,6 +29,10 @@ fltData <- DatabaseConnector::querySql(srDbConnection, "SELECT * FROM public.fir
 DatabaseConnector::disconnect(srDbConnection)
 
 fltData <- fltData[!(fltData$DATABASE %in% c('Germany', 'Hospital')),]
+# Eliminate some problematic dates for Estonia, Australia, Belgium
+fltData <- fltData[!(fltData$DATABASE == 'Estonia' & fltData$YEAR < 2012),]
+fltData <- fltData[!(fltData$DATABASE == 'Australia' & fltData$YEAR < 2009),]
+fltData <- fltData[!(fltData$DATABASE == 'Belgium' & fltData$YEAR >= 2018),]
 
 # Create a friendly drug name to use that cleans "[EHDEN RA] <drug> use" into "<drug>"
 fltData$drug <- tolower(trimws(gsub(" use", "", gsub("EHDEN RA", "", gsub("[][]", "", fltData$STEP_1)))))
@@ -75,6 +79,7 @@ sql <- "select database, year, step_1, SUM(personcount) personcount
 results <- DatabaseConnector::querySql(connection = srDbConnection, sql = sql)
 on.exit(DatabaseConnector::disconnect(connection))
 
+
 # Create a friendly group name to use that cleans "[EHDEN RA] <drug> use" into "<drug>"
 results$group <- tolower(trimws(gsub(" use", "", gsub("EHDEN RA", "", gsub("[][]", "", results$STEP_1)))))
 # Format the year as a integer
@@ -118,8 +123,10 @@ dataForStackedBar <- dataForStackedBar %>%
   arrange(desc(DATABASE), YEAR, factor(group, my.levels))
 dataForStackedBar$group <- factor(dataForStackedBar$group, levels = rev(unique(dataForStackedBar$group)))
 
-# Eliminate some problematic dates for Estonia & Australia
+# Eliminate some problematic dates for Estonia, Australia, Belgium
 dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Estonia' & dataForStackedBar$YEAR < 2012),]
 dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Australia' & dataForStackedBar$YEAR < 2009),]
+dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Belgium' & dataForStackedBar$YEAR >= 2018),]
+
 
 readr::write_csv(dataForStackedBar, path = "E:/git/ohdsi-studies/EhdenRaDrugUtilization/inst/shiny/ResultsExplorer/data/dmards_by_year.csv")
