@@ -29,11 +29,6 @@ fltData <- DatabaseConnector::querySql(srDbConnection, "SELECT * FROM public.fir
 DatabaseConnector::disconnect(srDbConnection)
 
 fltData <- fltData[!(fltData$DATABASE %in% c('Germany', 'Hospital')),]
-# Eliminate some problematic dates for Estonia, Australia, Belgium
-fltData <- fltData[!(fltData$DATABASE == 'Estonia' & fltData$YEAR < 2012),]
-fltData <- fltData[!(fltData$DATABASE == 'Australia' & fltData$YEAR < 2009),]
-fltData <- fltData[!(fltData$DATABASE == 'Belgium' & fltData$YEAR >= 2018),]
-
 # Create a friendly drug name to use that cleans "[EHDEN RA] <drug> use" into "<drug>"
 fltData$drug <- tolower(trimws(gsub(" use", "", gsub("EHDEN RA", "", gsub("[][]", "", fltData$STEP_1)))))
 # Format the year as a integer
@@ -47,10 +42,10 @@ fltByDB <- aggregate(fltData$TOT_PERSONCOUNT, by=list(Database=fltData$DATABASE,
 #format drug use
 drugsForReporting <- c("methotrexate", "hydroxychloroquine", "sulfasalazine", "leflunomide", "methotrexate +  hydroxychloroquine")
 drugsOfInterest <- fltByDB[which(fltByDB$drug %in% drugsForReporting), ]
-censoredDrugsOfInterest <- drugsOfInterest[which(drugsOfInterest$x < 5),] # censor those that are < 5
-drugsOfInterest <- drugsOfInterest[which(drugsOfInterest$x >= 5),] # censor those that are < 5
+#censoredDrugsOfInterest <- drugsOfInterest[which(drugsOfInterest$x < 5),] # censor those that are < 5
+#drugsOfInterest <- drugsOfInterest[which(drugsOfInterest$x >= 5),] # censor those that are < 5
 otherDrugs <- fltByDB[which(!(fltByDB$drug %in% drugsForReporting)), ]
-otherDrugs <- rbind(otherDrugs, censoredDrugsOfInterest)
+#otherDrugs <- rbind(otherDrugs, censoredDrugsOfInterest)
 otherDrugs$drug = "Other DMARDs & Minocycline"
 otherDrugs <- aggregate(otherDrugs$x, by=list(Database=otherDrugs$Database, otherDrugs$drug), FUN=sum)
 names(otherDrugs) <- c("Database", "drug", "count")

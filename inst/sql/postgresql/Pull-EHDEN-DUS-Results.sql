@@ -1,23 +1,28 @@
-﻿DROP TABLE IF EXISTS public.database_totals cascade;
+DROP TABLE IF EXISTS public.database_totals cascade;
 
 -- Totals by year
-with npr as (
-	select database, SUM(personcount) total_patients_with_paths
+WITH censoredYears AS (
+	select database, year, SUM(personcount) total_patients_with_paths
 	from public.network_pathways_results
-	group by database
-), nprTotal as (
-	select distinct database, year, totalcohortcount
-	from public.network_pathways_results
-), nprTotalAgg as (
-	SELECT database, SUM(totalcohortcount) total_cohort_count
-	from nprTotal
-	group by database
+	group by database, year HAVING SUM(personcount) < 10
+), personsWithPathsByYear as (
+  select npr.database, npr.year, SUM(npr.personcount) total_patients_with_paths
+  from public.network_pathways_results npr
+  left join censoredYears cy ON npr.database = cy.database AND npr.year = cy.year
+  WHERE cy.database IS NULL
+  group by npr.database, npr.year
+), totalPersonsByYear as (
+	select distinct npr.database, npr.year, npr.totalcohortcount
+	from public.network_pathways_results npr
+  left join censoredYears cy ON npr.database = cy.database AND npr.year = cy.year
+  WHERE cy.database IS NULL
 )
-SELECT npra.*, npr.total_patients_with_paths
+SELECT a.*, b.totalcohortcount
 INTO public.database_totals
-FROM npr
-INNER JOIN nprTotalAgg npra ON npra.database = npr.database
+FROM personsWithPathsByYear a
+INNER JOIN totalPersonsByYear b ON a.database = b.database AND a.year = b.year
 ;
+
 
 -- First line monotherapy by year
 
@@ -75,9 +80,15 @@ with flMono as(
 	UNION ALL
 	select database, year, step_1, tot_personcount
 	from combo
-) 
-SELECT *
+), censoredYears AS (
+	select database, year, SUM(personcount) total_patients_with_paths
+	from public.network_pathways_results
+	group by database, year HAVING SUM(personcount) < 10
+)
+SELECT r.*
 into public.first_line_therapy_by_year
-from results
+from results r
+left join censoredYears cy ON r.database = cy.database AND r.year = cy.year
+where cy.database is null
 order by database, year, tot_personcount desc
 ;
