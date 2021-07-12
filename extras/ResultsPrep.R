@@ -38,6 +38,10 @@ fltData$year_formatted <- as.integer(fltData$YEAR)
 fltTotals <- aggregate(fltData$TOT_PERSONCOUNT, by=list(Database=fltData$DATABASE), FUN=sum)
 names(fltTotals) <- c("Database", "Total")
 fltByDB <- aggregate(fltData$TOT_PERSONCOUNT, by=list(Database=fltData$DATABASE, drug=fltData$drug), FUN=sum)
+fltRADignosed <- unique(fltData[,c("DATABASE", "YEAR", "TOTALCOHORTCOUNT")])
+fltRADignosed <- aggregate(fltRADignosed$TOTALCOHORTCOUNT, by=list(Database=fltRADignosed$DATABASE), FUN=sum)
+names(fltRADignosed) <- c("Database", "Diagnosed")
+
 
 #format drug use
 drugsForReporting <- c("methotrexate", "hydroxychloroquine", "sulfasalazine", "leflunomide", "methotrexate +  hydroxychloroquine")
@@ -53,6 +57,7 @@ names(drugsOfInterest) <- c("Database", "drug", "count")
 # Bind the two data frames together to get the summary of csDMARDS
 dmardsByDB <- rbind(drugsOfInterest, otherDrugs)
 dmardsByDB <- merge(dmardsByDB, fltTotals) # Add the totals
+dmardsByDB <- merge(dmardsByDB, fltRADignosed) # Add the total diagnosed
 dmardsByDB$pct <- dmardsByDB$count/dmardsByDB$Total
 dmardsByDB$pct_formatted <- round(100*dmardsByDB$count/dmardsByDB$Total,1)
 
@@ -63,10 +68,10 @@ readr::write_csv(dmardsByDB, path = "E:/git/ohdsi-studies/EhdenRaDrugUtilization
 # Format the first-line therapy list and write to the shiny data directory
 srDbConnection <- DatabaseConnector::connect(srDbConnectionDetails)
 # Get the full results set for plotting
-sql <- "select database, year, step_1, SUM(personcount) personcount
+sql <- "select database, year, step_1, totalcohortcount, SUM(personcount) personcount
         from public.network_pathways_results
         where database NOT IN ('Hospital', 'Germany')
-        group by database, year, step_1 --HAVING SUM(personcount) > 5
+        group by database, year, step_1, totalcohortcount
         order by database, year, step_1
         ;"
 
@@ -89,7 +94,7 @@ dbSummary <- results %>%
 
 # Write all results to CSV
 data <- results  %>%
-  group_by(DATABASE, YEAR, group) %>%
+  group_by(DATABASE, YEAR, group, TOTALCOHORTCOUNT) %>%
   summarise(n = sum(PERSONCOUNT)) %>%
   mutate(percentage = n / sum(n)) %>%
   arrange(desc(DATABASE, group))
@@ -108,14 +113,14 @@ data[data$group == 'hydroxychloroquine +  methotrexate', "group"] <- "methotrexa
 allTreatments <- unique(data$group)
 treatmentsForSecularTrends <- c("methotrexate", "sulfasalazine", "leflunomide", "hydroxychloroquine", "methotrexate +  hydroxychloroquine")
 otherDrugsRolledUp <- data[(!data$group %in% treatmentsForSecularTrends) | (data$n < 5),] %>%
-  group_by(DATABASE, DB_KEY, YEAR) %>% 
+  group_by(DATABASE, DB_KEY, YEAR, TOTALCOHORTCOUNT) %>% 
   summarise(group = "Other DMARDs & Minocycline", n = sum(n), percentage = sum(percentage))
 #otherDrugsRolledUp <- otherDrugsRolledUp[otherDrugsRolledUp$n >= 5,] # Censor small cell counts
 dataForStackedBar <- rbind(data[(data$group %in% treatmentsForSecularTrends) & (data$n >= 5), ], 
                            otherDrugsRolledUp)
 my.levels <- c("methotrexate", "sulfasalazine", "leflunomide", "hydroxychloroquine", "Other DMARDs & Minocycline")
 dataForStackedBar <- dataForStackedBar %>%
-  arrange(desc(DATABASE), YEAR, factor(group, my.levels))
+  arrange(desc(DATABASE), YEAR, TOTALCOHORTCOUNT, factor(group, my.levels))
 dataForStackedBar$group <- factor(dataForStackedBar$group, levels = rev(unique(dataForStackedBar$group)))
 
 # Eliminate some problematic dates for Estonia, Australia, Belgium
