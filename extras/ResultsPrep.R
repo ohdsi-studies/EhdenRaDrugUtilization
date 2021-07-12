@@ -92,9 +92,12 @@ dbSummary <- results %>%
     maxYear = max(year_formatted)
   )
 
+totalRAByYear <- results %>%
+  distinct(DATABASE, YEAR, TOTALCOHORTCOUNT)
+
 # Write all results to CSV
 data <- results  %>%
-  group_by(DATABASE, YEAR, group, TOTALCOHORTCOUNT) %>%
+  group_by(DATABASE, YEAR, group) %>%
   summarise(n = sum(PERSONCOUNT)) %>%
   mutate(percentage = n / sum(n)) %>%
   arrange(desc(DATABASE, group))
@@ -113,20 +116,20 @@ data[data$group == 'hydroxychloroquine +  methotrexate', "group"] <- "methotrexa
 allTreatments <- unique(data$group)
 treatmentsForSecularTrends <- c("methotrexate", "sulfasalazine", "leflunomide", "hydroxychloroquine", "methotrexate +  hydroxychloroquine")
 otherDrugsRolledUp <- data[(!data$group %in% treatmentsForSecularTrends) | (data$n < 5),] %>%
-  group_by(DATABASE, DB_KEY, YEAR, TOTALCOHORTCOUNT) %>% 
+  group_by(DATABASE, DB_KEY, YEAR) %>% 
   summarise(group = "Other DMARDs & Minocycline", n = sum(n), percentage = sum(percentage))
 #otherDrugsRolledUp <- otherDrugsRolledUp[otherDrugsRolledUp$n >= 5,] # Censor small cell counts
 dataForStackedBar <- rbind(data[(data$group %in% treatmentsForSecularTrends) & (data$n >= 5), ], 
                            otherDrugsRolledUp)
 my.levels <- c("methotrexate", "sulfasalazine", "leflunomide", "hydroxychloroquine", "Other DMARDs & Minocycline")
 dataForStackedBar <- dataForStackedBar %>%
-  arrange(desc(DATABASE), YEAR, TOTALCOHORTCOUNT, factor(group, my.levels))
+  arrange(desc(DATABASE), YEAR, factor(group, my.levels))
 dataForStackedBar$group <- factor(dataForStackedBar$group, levels = rev(unique(dataForStackedBar$group)))
+dataForStackedBar <- merge(dataForStackedBar, totalRAByYear)
 
 # Eliminate some problematic dates for Estonia, Australia, Belgium
 dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Estonia' & dataForStackedBar$YEAR < 2012),]
 dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Australia' & dataForStackedBar$YEAR < 2009),]
 dataForStackedBar <- dataForStackedBar[!(dataForStackedBar$DB_KEY == 'Belgium' & dataForStackedBar$YEAR >= 2018),]
-
 
 readr::write_csv(dataForStackedBar, path = "E:/git/ohdsi-studies/EhdenRaDrugUtilization/inst/shiny/ResultsExplorer/data/dmards_by_year.csv")
